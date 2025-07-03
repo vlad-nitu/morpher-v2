@@ -81,7 +81,7 @@ source venv/bin/activate
 ### 6. Go into the `/home` directory and then clone Morpher V2
 ```
 cd /home && \ 
-git clone --recurse-submodules  https://github.com/vlad-nitu/morpher-v2.git && \
+git clone --recurse-submodules  https://github.com/ecolab-nus/morpher-v2.git && \
 cd morpher-v2
 ```
 
