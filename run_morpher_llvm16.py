@@ -99,8 +99,6 @@ def main(csource, function, config= "config/default_config.yaml"):
     os.system('clang -D CGRA_COMPILER -target x86_64-unknown-linux-gnu -Wno-implicit-function-declaration -Wno-format -Wno-main-return-type -c -fno-jump-tables -emit-llvm -O2 -fno-tree-vectorize -fno-unroll-loops %s -S -o %s.ll'%(csourcefile,kernel))
     #os.system('clang -D CGRA_COMPILER -target x86_64-unknown-linux-gnu -Wno-implicit-function-declaration -Wno-format -Wno-main-return-type -c -emit-llvm -O2 -fno-vectorize -fno-slp-vectorize -fno-tree-vectorize -fno-inline -fno-unroll-loops %s -S -o %s.ll'%(csourcefile,kernel))
 
-    print('Optimizing IR..\n')
-    os.system('opt -gvn -mem2reg -memdep -memcpyopt -lcssa -loop-simplify -licm -loop-deletion -indvars -simplifycfg -mergereturn -indvars  %s.ll -S -o %s_opt.ll' % (kernel,kernel))
 
     print('Generating DFG (%s_PartPredDFG.xml/dot) and data layout (%s_mem_alloc.txt)..\n' % (kernel,kernel))
     # Run in RELEASE (i.e., no DEBUG outputs)
@@ -109,6 +107,9 @@ def main(csource, function, config= "config/default_config.yaml"):
     # Run in DEBUG
     # TODO: remove debug run, uncomment the line above
     # os.system('opt -load %s/build/src/libdfggenPass.so -debug -fn %s -nobanks %d -banksize %d -type %s  -enable-new-pm=0 -dfggen %s_opt.ll -S -o %s_opt_instrument.ll' % (DFG_GEN_HOME,kernel,numberofbanks,banksize, dfg_type,kernel,kernel))
+
+    print('Optimizing IR..\n')
+    os.system('opt -gvn -mem2reg -memdep -memcpyopt -lcssa -loop-simplify -licm -loop-deletion -indvars -simplifycfg -mergereturn -indvars  %s.ll -S -o %s_opt.ll' % (kernel,kernel))
 
 
     os.system('dot -Tpdf %s_PartPredDFG.dot -o %s_PartPredDFG.pdf' % (kernel,kernel))
