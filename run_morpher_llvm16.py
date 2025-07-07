@@ -96,7 +96,7 @@ def main(csource, function, config= "config/default_config.yaml"):
     os.system('rm *.xml')
     os.system('rm *.dot')
     print('Generating IR..\n')
-    os.system('clang -D CGRA_COMPILER -target x86_64-unknown-linux-gnu -Wno-implicit-function-declaration -Wno-format -Wno-main-return-type -c -fno-jump-tables -emit-llvm -O2 -fno-tree-vectorize -fno-unroll-loops %s -S -o %s.ll'%(csourcefile,kernel))
+    os.system('clang -D CGRA_COMPILER -target x86_64-unknown-linux-gnu -Wno-implicit-function-declaration -Wno-format -Wno-main-return-type -c -emit-llvm -O2 -fno-tree-vectorize -fno-unroll-loops %s -S -o %s.ll'%(csourcefile,kernel))
     #os.system('clang -D CGRA_COMPILER -target x86_64-unknown-linux-gnu -Wno-implicit-function-declaration -Wno-format -Wno-main-return-type -c -emit-llvm -O2 -fno-vectorize -fno-slp-vectorize -fno-tree-vectorize -fno-inline -fno-unroll-loops %s -S -o %s.ll'%(csourcefile,kernel))
 
     print('Optimizing IR..\n')
