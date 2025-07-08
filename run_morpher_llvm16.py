@@ -154,7 +154,7 @@ def main(csource, function, config= "config/default_config.yaml"):
       os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x 4 -y 4 -j %s -i %d -t HyCUBE_4REG -m %d' % (MAPPER_HOME,kernel,json_arch, init_II, mapping_method))
 
       os.chdir(SIMULATOR_KERNEL)
-      os.system('rm *.bin')  
+      # os.system('rm *.bin')  
   
       os.chdir(MAPPER_KERNEL)
       os.system('cp *.bin '+ SIMULATOR_KERNEL)  
