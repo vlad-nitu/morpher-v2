@@ -167,6 +167,8 @@ def main(csource, function, config= "config/default_config.yaml"):
       os.system('cp *_pillars_i.txt '+ARCHGEN_KERNEL+kernel+'_i.txt ')
       os.system('cp *_pillars_r.txt '+ARCHGEN_KERNEL+kernel+'_r.txt ')
       os.system('cp mapped_ii.txt '+ARCHGEN_KERNEL)
+      # Added by me
+      os.system('cp *.bin '+ SIMULATOR_KERNEL)  
     else:
       os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x 4 -y 4 -j %s/json_arch/%s -i %d -m %d' % (MAPPER_HOME,kernel,MAPPER_HOME, json_arch, init_II, mapping_method))
   
